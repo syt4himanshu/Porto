@@ -2,17 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap');
+
 @layer base {
+  :root {
+    --primary: #59A5FF;
+    --secondary: #7B61FF;
+    --dark: #12182B;
+    --darker: #0D1220;
+    --light: #A1AAB9;
+    --lighter: #ECF0F3;
+  }
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    @apply bg-dark-blue text-white;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark);
+    color: var(--lighter);
+  }
+
+  h1, h2, h3, h4, nav {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--darker);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
   }
 }
 
 @layer components {
+  .gradient-text {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .section-glow {
+    position: relative;
+  }
+
+  .section-glow::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: radial-gradient(ellipse at top, rgba(89, 165, 255, 0.15) 0%, transparent 70%);
+    z-index: -1;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
   .section-padding {
     @apply py-16 px-4 md:px-8 lg:px-16;
   }
